@@ -28,26 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTemporary = new System.Windows.Forms.Label();
+            this.btnSolar = new System.Windows.Forms.Button();
+            this.btnNuclear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTemporary
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe Script", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(340, 160);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Hello Mason";
+            this.lblTemporary.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTemporary.Location = new System.Drawing.Point(254, 42);
+            this.lblTemporary.Name = "lblTemporary";
+            this.lblTemporary.Size = new System.Drawing.Size(278, 66);
+            this.lblTemporary.TabIndex = 0;
+            this.lblTemporary.Text = "Please select the game you want to play:";
+            this.lblTemporary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSolar
+            // 
+            this.btnSolar.AllowDrop = true;
+            this.btnSolar.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnSolar.Location = new System.Drawing.Point(276, 150);
+            this.btnSolar.Name = "btnSolar";
+            this.btnSolar.Size = new System.Drawing.Size(220, 67);
+            this.btnSolar.TabIndex = 1;
+            this.btnSolar.Text = "Solar";
+            this.btnSolar.UseVisualStyleBackColor = true;
+            this.btnSolar.Click += new System.EventHandler(this.btnSolar_Click);
+            // 
+            // btnNuclear
+            // 
+            this.btnNuclear.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.btnNuclear.Location = new System.Drawing.Point(276, 238);
+            this.btnNuclear.Name = "btnNuclear";
+            this.btnNuclear.Size = new System.Drawing.Size(220, 67);
+            this.btnNuclear.TabIndex = 2;
+            this.btnNuclear.Text = "Nuclear";
+            this.btnNuclear.UseVisualStyleBackColor = true;
+            this.btnNuclear.Click += new System.EventHandler(this.btnNuclear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnNuclear);
+            this.Controls.Add(this.btnSolar);
+            this.Controls.Add(this.lblTemporary);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Energetics";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -55,7 +83,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTemporary;
+        private System.Windows.Forms.Button btnSolar;
+        private System.Windows.Forms.Button btnNuclear;
     }
 }
 
