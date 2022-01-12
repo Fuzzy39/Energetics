@@ -14,6 +14,8 @@ namespace Energetics
     {
         Form1 mainForm;
 
+        private Label lblCount;
+
         public Form3(Form1 creator)
         {
             InitializeComponent();
@@ -22,6 +24,10 @@ namespace Energetics
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            for (int x = 0; x < 20; x++)
+            {
+                lblCount = new Label();
+            }
 
         }
     }
