@@ -104,20 +104,23 @@ namespace Energetics
         {
             isHovered = true;
             hoverFrame = 10;
+            hoverspeed = 7;
         }
 
         private void lblTile_MouseLeave(object sender, EventArgs e)
         {
             isHovered = false;
             hoverFrame = 0;
-            hoverspeed = 1;
+            hoverspeed = 7;
         }
 
         private void lblTile_Click(object sender, EventArgs e)
         {
             // can you detect a right click?
             // eh, whatever.
-            MessageBox.Show("You clicked at tile (" + gridLocation.X + ", " + gridLocation.Y + ").");
+            hoverFrame = -30;
+            hoverspeed = 7;
+            //MessageBox.Show("You clicked at tile (" + gridLocation.X + ", " + gridLocation.Y + ").");
         }
     }
 
