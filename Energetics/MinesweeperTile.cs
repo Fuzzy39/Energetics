@@ -10,21 +10,23 @@ using System.Windows.Forms;
 
 namespace Energetics
 {
-    public class MinesweeperTile : Label
+    public partial class MinesweeperTile : UserControl
     {
         // 'settings'
-        private const int size = 80;
+       // private const int size = 80;
         private const int baseRed = 100;
-        private const int baseGreen = 150;
+        private const int baseGreen = 160;
         private const int baseBlue = 100;
-        private const int colorJitterRange = 40;
+        private const int colorRange = 20;
+        private double colorFrame = 0;
+        private double colorFrameRate = .01;
 
         static private Random rand = new Random();
         private Point gridLocation;
         private int neighbors;
         private bool revealed;
 
-        public MinesweeperTile(Point gridLocation, Point location, int neighbors)
+        public MinesweeperTile(int size, Point gridLocation, Point location, int neighbors)
         {
            
             this.gridLocation = gridLocation;
@@ -32,27 +34,38 @@ namespace Energetics
             this.neighbors = neighbors;
             revealed = false;
 
-            // style the tile all fancylike
-            this.Size = new Size(80, 80);
+            
+            InitializeComponent();
+            colorFrame = rand.NextDouble() * 6.28;
+            lblTile.BackColor = determineColor(colorFrame);
+            this.Size = new Size(size, size);
+            lblTile.Size = new Size(size - 4, size - 4);
 
-            this.BackColor = determineColor();
-            this.ForeColor = Color.White;
-            this.Text = "?";
-            this.TextAlign = ContentAlignment.MiddleCenter;
-            this.Font = new Font(FontFamily.GenericSansSerif, 12f, FontStyle.Bold);
+            colorFrameRate += .01*rand.Next(0, 6);
 
         }
 
-        private Color determineColor()
+        public void MinesweeperTile_Load(object sender, EventArgs e)
+        {
+
+        }
+        private Color determineColor(double colorFrame)
         {
             int red = baseRed;
             int green = baseGreen;
             int blue = baseBlue;
 
            
-            int jitter = rand.Next(-1 * (colorJitterRange / 2), colorJitterRange / 2);
+            int jitter = (int)(colorRange*Math.Sin(colorFrame));
             green += jitter;
             return Color.FromArgb(255, red, green, blue);
+        }
+
+        public void update()
+        {
+            colorFrame += colorFrameRate;
+          // MessageBox.Show(this.BackColor.ToString());
+            lblTile.BackColor=determineColor(colorFrame);
         }
     }
 }
