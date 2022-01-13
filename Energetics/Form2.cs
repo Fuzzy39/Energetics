@@ -13,8 +13,7 @@ namespace Energetics
     public partial class Form2 : Form
     {
         Form1 mainForm;
-        Label test;
-        double pos;
+       
 
         public Form2(Form1 creator)
         {
@@ -27,50 +26,45 @@ namespace Energetics
         private void Form2_Load(object sender, EventArgs e)
         {
 
+            // Example code to set up a control programmatically
+            this.Controls.Add( new MinesweeperTile(new Point(), new Point(200, 100), 0));
+            this.Controls.Add(new MinesweeperTile(new Point(), new Point(200, 180), 0));
+            this.Controls.Add(new MinesweeperTile(new Point(), new Point(280, 100), 0));
+            this.Controls.Add(new MinesweeperTile(new Point(), new Point(280, 180), 0));
 
-            test = new Label();
-            test.ForeColor = Color.White;
-            test.BackColor = Color.FromArgb(255, 200, 80, 0);
-            test.TextAlign = ContentAlignment.MiddleCenter;
-            test.Location = new Point(100, 100);
-            test.Text = "DON'T CLICK ME!!";
-            test.Font = new Font(FontFamily.GenericSansSerif, 12f, FontStyle.Bold);
-            test.Size = new Size(100, 100);
-            test.Click += test_Click;
+            /*  MinesweeperTile test = new MinesweeperTile();
+              test.ForeColor = Color.White;
+              test.BackColor = Color.FromArgb(255, 200, 80, 0);
+              test.TextAlign = ContentAlignment.MiddleCenter;
+              test.Location = new Point(100, 100);
+              test.Text = "DON'T CLICK ME!!";
+              test.Font = new Font(FontFamily.GenericSansSerif, 12f, FontStyle.Bold);
+              test.Size = new Size(100, 100);
+              //test.Click += test_Click;
+              this.Controls.Add(test);*/
 
-            pos = 0;
-            this.Controls.Add(test);
+
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainForm.Visible = true;
-           // mainForm.Close();
+            // mainForm.Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
 
-            Point Center = new Point(350, 200);
-            double speed = .06; // in radians
-            int size = 200; // in pixels
-            pos += speed;
+            // This timer ticks every 32 ms, about 30 times a second
 
-
-            // I know, trig is scary
-            test.Location = new Point(
-                (int)(size * Math.Cos(pos)) + Center.X,
-                (int)(size * Math.Sin(pos)) + Center.Y
-            );
         }
 
         private void Form2_VisibleChanged(object sender, EventArgs e)
         {
+            // We only want the game's timer running when the game is.
             if (this.Visible)
             {
                 timer1.Start();
@@ -81,12 +75,6 @@ namespace Energetics
         }
 
 
-        private void test_Click(object sender, EventArgs e)
-        {
-            timer1.Stop();
-            test.BackColor = Color.Red;
-            MessageBox.Show("You blew up the reactor!\nIt's going to cost so much to fix...", "YOU IDIOT!");
-            this.Close();
-        }
+      
     }
 }
