@@ -14,9 +14,9 @@ namespace Energetics
     {
         Form1 mainForm;
         MinesweeperTile[,] gameSpace;
-        int gridHeight = 7;
-        int gridWidth = 10;
-        int tileSize = 78;
+        int gridHeight = 10;
+        int gridWidth = 13;
+        int tileSize = 60;
 
         public Form2(Form1 creator)
         {
@@ -36,6 +36,8 @@ namespace Energetics
             this.Controls.Add(new MinesweeperTile(80,new Point(), new Point(280, 100), 0));
             this.Controls.Add(new MinesweeperTile(80,new Point(), new Point(280, 180), 0));*/
 
+
+
             // this code might be kinda temporary
             // it's purpose is to lay down a grid of minesweeper tiles
             gameSpace = new MinesweeperTile[gridWidth,gridHeight];
@@ -48,8 +50,8 @@ namespace Energetics
                    // create a tile at the appropriate location
                    MinesweeperTile tile = new MinesweeperTile(
                         tileSize,
-                        new Point(),
-                        new Point((tileSize*x), + (tileSize * y)),
+                        new Point(x,y), // position on grid
+                        new Point((tileSize*x), + (tileSize * y)), // position in pixels
                         0 // number of neighbors that are bombs, which we will worry about later
                     );
 

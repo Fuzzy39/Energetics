@@ -42,8 +42,10 @@
             this.lblTile.Name = "lblTile";
             this.lblTile.Size = new System.Drawing.Size(76, 76);
             this.lblTile.TabIndex = 0;
-            this.lblTile.Text = "?";
             this.lblTile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTile.Click += new System.EventHandler(this.lblTile_Click);
+            this.lblTile.MouseEnter += new System.EventHandler(this.lblTile_MouseEnter);
+            this.lblTile.MouseLeave += new System.EventHandler(this.lblTile_MouseLeave);
             // 
             // MinesweeperTile
             // 
