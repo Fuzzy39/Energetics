@@ -52,7 +52,7 @@ namespace Energetics
                         tileSize,
                         new Point(x,y), // position on grid
                         new Point((tileSize*x), + (tileSize * y)), // position in pixels
-                        0 // number of neighbors that are bombs, which we will worry about later
+                        ((x+y)%2)-1 // number of neighbors that are bombs, which we will worry about later
                     );
 
                     // add it to the array and to the controls
