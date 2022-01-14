@@ -20,6 +20,7 @@ namespace Energetics
         bool moveLeft;
         bool moveRigt;
         bool gameOver;
+        bool firstTimeOnPage = true;
 
         int score;
         int ballX;
@@ -41,10 +42,10 @@ namespace Energetics
             ballX = 5;
             ballyY = 5;
             playerSpeed = 12;
-            lbl_Score.Text = "Score: " + score.ToString();
+            lbl_Score.Text = "You have: " + score.ToString();
 
-            //starts the timer
-            timer.Start();
+            
+           
 
             foreach (Control x in this.Controls) //runs code for each control
             {
@@ -73,6 +74,30 @@ namespace Energetics
         private void keyisup(object sender, KeyEventArgs e)
         {
 
+        }
+
+        private void Form3_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                timer.Start();
+                if (firstTimeOnPage == true)
+                {
+                    MessageBox.Show("Hi", "Welcome to the solar game", MessageBoxButtons.OK);
+                    firstTimeOnPage = false;
+                    firstTimeOnPage = false;
+                }
+            }
+            else
+            {
+                timer.Stop();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            mainForm.Visible = true;
         }
     }
 }
