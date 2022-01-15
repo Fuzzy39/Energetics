@@ -19,7 +19,7 @@ namespace Energetics
         //variables
         bool moveLeft;
         bool moveRigt;
-        bool gameOver;
+        bool isgameOver;
         bool firstTimeOnPage = true;
 
         int score;
@@ -29,30 +29,99 @@ namespace Energetics
 
         Random rand = new Random();
 
+        PictureBox[] blockArray;
+
         public Form3(Form1 creator)
         {
             InitializeComponent();
             mainForm = creator;
+
+            PlaceBlocks();
         }
 
         private void setupGame()
         {
             //sets speeds and score
+            isgameOver = false;
             score = 0;
             ballX = 5;
             ballyY = 5;
             playerSpeed = 12;
-            lbl_Score.Text = "You have: " + score.ToString();
 
-            
-           
+            ball.Left = 413;
+            ball.Top = 374;
+
+            player.Left = 361;
+            player.Top = 400;
+
+            //timer.Start();
+
 
             foreach (Control x in this.Controls) //runs code for each control
             {
                 if (x is PictureBox && (string)x.Tag == "blocks") //runs if x is a picturebox with a blocks tag
                 {
-
+                    x.BackColor = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
                 }
+            }
+        }
+
+        private void gameOver(string message)
+        {
+            isgameOver = true;
+            timer.Stop();
+            if (score == 1)
+            {
+                lblWinOrLose.Text = message;
+            }
+            else if (score != 1)
+            {
+                lblWinOrLose.Text = message;
+            }
+
+            btnReturn.Visible = true;
+        }
+
+        private void PlaceBlocks()
+        {
+            blockArray = new PictureBox[32];
+            int a = 0;
+            int top = 50;
+            int left = 8;
+
+            for (int i = 0; i < blockArray.Length; i++)
+            {
+                blockArray[i] = new PictureBox();
+                blockArray[i].Height = 32;
+                blockArray[i].Width = 99;
+                blockArray[i].Tag = "blocks";
+                blockArray[i].BackColor = Color.Yellow;
+
+                if (a == 8)
+                {
+                    top = top + 50;
+                    left = 8;
+                    a = 0;
+                }
+
+                if (a < 8)
+                {
+                    a++;
+                    blockArray[i].Left = left;
+                    blockArray[i].Top = top;
+                    this.Controls.Add(blockArray[i]);
+                    left = left + 104;
+                }
+            }
+
+            setupGame();
+        }
+
+        private void removeBlocks()
+        {
+            foreach(PictureBox x in blockArray)
+            {
+                this.Controls.Remove(x);
             }
         }
 
@@ -63,29 +132,111 @@ namespace Energetics
 
         private void mainGameTimerEvent(object sender, EventArgs e)
         {
+            if (score ==1)
+            {
+                lbl_Score.Text = "You have made " + score + " collision!";
+            }
+            else if (score != 1)
+            {
+                lbl_Score.Text = "You have made " + score + " collisions!";
+            }
+            
+            
+            if (moveLeft == true && player.Left > 0)
+            {
+                player.Left -= playerSpeed;
+            }
+
+            if (moveRigt == true && player.Left < 722)
+            {
+                player.Left += playerSpeed;
+            }
+
+            ball.Left += ballX;
+            ball.Top += ballyY;
+
+            if (ball.Left < 0 || ball.Left > 822)
+            {
+                ballX = -ballX;
+            }
+            if (ball.Top < 0)
+            {
+                ballyY = -ballyY;
+            }
+            if (ball.Bounds.IntersectsWith(player.Bounds))
+            {
+                ballyY = rand.Next(5, 12) * -1;
+
+                if (ballX < 0)
+                {
+                    ballX = rand.Next(5, 12) * -1;
+                }
+                else
+                {
+                    ballX = rand.Next(5, 12);
+                }
+            }
+
+            foreach (Control x in this.Controls)
+            {
+                if (x is PictureBox && (string)x.Tag == "blocks")
+                {
+                    if (ball.Bounds.IntersectsWith(x.Bounds))
+                    {
+                        score += 1;
+                        ballyY = -ballyY;
+                        this.Controls.Remove(x);
+                    }
+                }
+            }
+
+            if (score == 32)
+            {
+                gameOver("You Win!!");
+            }
+            if (ball.Top > 500)
+            {
+                gameOver("You lost :(");
+            }
 
         }
 
         private void keyisdown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Left)
+            {
+                moveLeft = true;
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                moveRigt = true;
+            }
 
+           
         }
 
         private void keyisup(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Left)
+            {
+                moveLeft = false;
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                moveRigt = false;
+            }
         }
 
         private void Form3_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible)
             {
-                timer.Start();
+                //timer.Start();
                 if (firstTimeOnPage == true)
                 {
-                    MessageBox.Show("Hi", "Welcome to the solar game", MessageBoxButtons.OK);
+                    //MessageBox.Show("Hi", "Welcome to the solar game", MessageBoxButtons.OK);
                     firstTimeOnPage = false;
-                    firstTimeOnPage = false;
+                    
                 }
             }
             else
@@ -96,8 +247,20 @@ namespace Energetics
 
         private void button1_Click(object sender, EventArgs e)
         {
+            removeBlocks();
+            PlaceBlocks();
+
+            btnReturn.Visible = false;
+            btnStart.Visible = true;
+            
             this.Hide();
             mainForm.Visible = true;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            timer.Start();
+            btnStart.Visible = false;
         }
     }
 }
