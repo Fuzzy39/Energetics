@@ -211,7 +211,7 @@ namespace Energetics
             {
                 moveRigt = true;
             }
-
+            MessageBox.Show("rhf");
            
         }
 

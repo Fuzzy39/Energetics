@@ -54,7 +54,7 @@ namespace Energetics
             lblTile.BackColor = determineColor(colorFrame);
             this.Size = new Size(size, size);
             lblTile.Size = new Size(size - 4, size - 4);
-            lblTile.Font = new Font("Arial Black", (int)(.3*(size-4)), FontStyle.Bold);
+            lblTile.Font = new Font("Arial Black", (int)(.4*(size-4)), FontStyle.Bold);
             colorFrameRate += .01*rand.Next(0, 4);
 
         }
@@ -288,74 +288,6 @@ namespace Energetics
                     brightness = target;
                 }
             }
-
-
-
-            /*
-            if (isHovered)
-            {
-                // we need to figure out the correct speed and apply it.
-                target = hoverBrightnessTarget;
-                distance = hoverBrightnessTarget - brightness;
-                         
-            }
-            else
-            {
-                // target is 0
-                target = 0;
-                distance = brightness;
-            }
-
-           // lblTile.Text = distance + "";
-            // based on the distance from our target, we can set our exponent.
-            // if the distance is half of the hover brightness target, the speed will be reduced.
-            if (distance == 0)
-            {
-                return;
-            }
-            
-
-            int brightSpeed = 0;
-
-            if *Math.Abs(distance) < hoverBrightnessTarget / 2true)
-            {
-                // brightness speed is accellerating
-                int distanceCovered = target - distance;
-                brightSpeed = (int)(HoverBaseSpeed * Math.Pow(HoverSpeedExponent, distanceCovered));
-            }
-            else
-            {
-                // brightness speed is decreasing, so we need to add another term.
-                int midPoint = hoverBrightnessTarget / 2;
-                int distanceCovered = Math.Abs(hoverBrightnessTarget - distance - midPoint);
-                int maxSpeed = (int)(HoverBaseSpeed * Math.Pow(HoverSpeedExponent, midPoint));
-                brightSpeed = maxSpeed - (int)(HoverBaseSpeed * Math.Pow(1.0/HoverSpeedExponent, distanceCovered));
-            }
-            
-            brightness += brightSpeed;
-            */
-            /*hoverFrame += (int)hoverspeed;
-            if (hoverFrame > hoverCap)
-            {
-                hoverFrame = hoverCap;
-                //hoverspeed *= -1;
-            }
-
-            // add this 'frame's' effect
-            red += hoverFrame;
-            green += hoverFrame;
-            blue += hoverFrame;
-
-            // tween hover effects
-            if (hoverFrame <= hoverCap * .5)
-            {
-                hoverspeed *= 1.7;
-            }
-            else
-            {
-                hoverspeed *= 1.0 / 1.7;
-            }*/
-
 
         }   
             

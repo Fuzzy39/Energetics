@@ -30,11 +30,10 @@ namespace Energetics
         {
 
             // Example code to set up a control programmatically
-            /*test =new MinesweeperTile(80,new Point(), new Point(200, 100), 0);
+            /*
+            test =new MinesweeperTile(80,new Point(), new Point(200, 100), 0);
             this.Controls.Add(test);
-            this.Controls.Add(new MinesweeperTile(80,new Point(), new Point(200, 180), 0));
-            this.Controls.Add(new MinesweeperTile(80,new Point(), new Point(280, 100), 0));
-            this.Controls.Add(new MinesweeperTile(80,new Point(), new Point(280, 180), 0));*/
+            */
 
 
 
@@ -43,7 +42,7 @@ namespace Energetics
             gameSpace = new MinesweeperTile[gridWidth,gridHeight];
 
             // loop through all of the tiles
-            for(int x = 0; x< gridWidth; x++)
+            /*for(int x = 0; x< gridWidth; x++)
             {
                 for(int y = 0; y< gridHeight; y++)
                 {
@@ -59,20 +58,7 @@ namespace Energetics
                     this.Controls.Add(tile);
                     gameSpace[x,y] = tile;
                 }
-            }
-
-            /*  MinesweeperTile test = new MinesweeperTile();
-              test.ForeColor = Color.White;
-              test.BackColor = Color.FromArgb(255, 200, 80, 0);
-              test.TextAlign = ContentAlignment.MiddleCenter;
-              test.Location = new Point(100, 100);
-              test.Text = "DON'T CLICK ME!!";
-              test.Font = new Font(FontFamily.GenericSansSerif, 12f, FontStyle.Bold);
-              test.Size = new Size(100, 100);
-              //test.Click += test_Click;
-              this.Controls.Add(test);*/
-
-
+            }*/
 
         }
 
@@ -91,14 +77,14 @@ namespace Energetics
             // This timer ticks every 32 ms, about 30 times a second
 
             // update every tile.
-            for (int x = 0; x < gridWidth; x++)
+           /* for (int x = 0; x < gridWidth; x++)
             {
                 for (int y = 0; y < gridHeight; y++)
                 {
                     
                     gameSpace[x,y].update();
                 }
-            }
+            }*/
         }
 
         private void Form2_VisibleChanged(object sender, EventArgs e)
