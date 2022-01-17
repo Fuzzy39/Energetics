@@ -31,7 +31,7 @@ namespace Energetics
 
         static private Random rand = new Random();
         private Point gridLocation;
-        private int neighbors;
+        public int neighbors;
         private bool revealed;
         private bool flagged;
 
@@ -39,9 +39,12 @@ namespace Energetics
         {
 
             //                      u    X    0    1    2    3    4    5    6    7    8
-            baseReds = new int[]  { 55,  230, 135, 40,  70,  100, 130, 160, 160, 160, 160};
-            baseGreens = new int[]{ 135, 20,  135, 40,  70,  100, 130, 160, 120, 80,  40};
-            baseBlues = new int[] { 55,  20,  135, 160, 130, 100, 70,  40,  40,  40,  40};
+            //baseReds = new int[]  { 55,  230, 135, 40,  70,  100, 130, 160, 160, 160, 160};
+            //baseGreens = new int[]{ 135, 20,  135, 40,  70,  100, 130, 160, 120, 80,  40};
+            //baseBlues = new int[] { 55,  20,  135, 160, 130, 100, 70,  40,  40,  40,  40};
+            baseReds = new int[]  { 110,  230, 135, 40,  40,  160, 160, 160, 120,  80,  20 };
+            baseGreens = new int[]{ 150, 20,  135, 40,  160,  160, 120, 40,  40,  30,  20};
+            baseBlues = new int[] { 110,  20,  135, 160, 40,  40,  40,  40,  40,  30,  20};
             this.gridLocation = gridLocation;
             this.Location = location;
             this.neighbors = neighbors;
@@ -96,16 +99,18 @@ namespace Energetics
 
             if (!revealed)
             {
-                green += jitter;
+                green += (int)(jitter/1.5);
+               // red += jitter/2;
+                //blue += jitter/2;
             }
             else
             {
                 switch(neighbors)
                 {
                     case -1:
-                    case 6:
+                    case 5:
                     case 7:
-                    case 8:
+                    case 6:
                         red += 2*jitter;
                         break;
                     case 0:
@@ -114,15 +119,20 @@ namespace Energetics
                         blue += jitter;
                         break;
                    case 1:
-                    case 2:
+                   
                         blue += 2*jitter;
                         break;
-                    
-                    case 4:
-                    case 5:
-                   
+                    case 2:
+                        green += jitter;
+                        break;
+                    case 3:   
                         green += jitter;
                         red += jitter;
+                        break;
+                    case 4:
+                   
+                        green += (int)(.5*jitter);
+                        red += (int)(1.5*jitter);
                         break;
 
                 }
@@ -191,16 +201,22 @@ namespace Energetics
             {
                 if (!revealed & !flagged)
                 {
-                    reveal();
+                    reveal(false);
                 }
             }
             
             //MessageBox.Show("You clicked at tile (" + gridLocation.X + ", " + gridLocation.Y + ").");
         }
 
-        private void reveal()
+        // isBomb: has the player already lost?
+        public void reveal(bool isBomb)
         {
-            
+
+            if (revealed)
+            {
+                return;
+            }
+
             brightness = 150;
             brightnessChange = 0;
             revealed = true;
@@ -208,10 +224,13 @@ namespace Energetics
             if(neighbors==-1)
             {
                 lblTile.Text = "💣";
+                if(!isBomb)
+                    Form2.revealAll();
                 return;
             }
             if(neighbors==0)
             {
+                Form2.revealAdjacent(gridLocation.X, gridLocation.Y);
                 return;
             }
             lblTile.Text = "" + neighbors;

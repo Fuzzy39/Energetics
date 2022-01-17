@@ -31,14 +31,19 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.minesweeperButton1 = new Energetics.minesweeperButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMedium = new Energetics.minesweeperButton();
+            this.btnEasy = new Energetics.minesweeperButton();
+            this.btnHard = new Energetics.minesweeperButton();
+            this.btnBack = new Energetics.minesweeperButton();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(375, 46);
+            this.label1.Location = new System.Drawing.Point(181, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
@@ -48,42 +53,81 @@
             this.timer1.Interval = 33;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button1
+            // label3
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(130)))), ((int)(((byte)(100)))));
-            this.button1.Font = new System.Drawing.Font("Arial Black", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(619, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 59);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Text";
-            this.button1.UseVisualStyleBackColor = false;
+            this.label3.Font = new System.Drawing.Font("Arial Black", 19F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(115, 77);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "New Game";
             // 
-            // minesweeperButton1
+            // panel1
             // 
-            this.minesweeperButton1.BackColor = System.Drawing.Color.White;
-            this.minesweeperButton1.Location = new System.Drawing.Point(229, 31);
-            this.minesweeperButton1.Name = "minesweeperButton1";
-            this.minesweeperButton1.Size = new System.Drawing.Size(140, 60);
-            this.minesweeperButton1.TabIndex = 2;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(175)))), ((int)(((byte)(160)))));
+            this.panel1.Controls.Add(this.btnMedium);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.btnEasy);
+            this.panel1.Controls.Add(this.btnHard);
+            this.panel1.Location = new System.Drawing.Point(186, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(562, 82);
+            this.panel1.TabIndex = 8;
+            // 
+            // btnMedium
+            // 
+            this.btnMedium.BackColor = System.Drawing.Color.White;
+            this.btnMedium.Location = new System.Drawing.Point(265, 12);
+            this.btnMedium.Name = "btnMedium";
+            this.btnMedium.Size = new System.Drawing.Size(140, 60);
+            this.btnMedium.TabIndex = 4;
+            this.btnMedium.Click += new System.EventHandler(this.btnMedium_Click);
+            // 
+            // btnEasy
+            // 
+            this.btnEasy.BackColor = System.Drawing.Color.White;
+            this.btnEasy.Location = new System.Drawing.Point(119, 12);
+            this.btnEasy.Name = "btnEasy";
+            this.btnEasy.Size = new System.Drawing.Size(140, 60);
+            this.btnEasy.TabIndex = 5;
+            this.btnEasy.Click += new System.EventHandler(this.btnEasy_Click);
+            // 
+            // btnHard
+            // 
+            this.btnHard.BackColor = System.Drawing.Color.White;
+            this.btnHard.Location = new System.Drawing.Point(411, 12);
+            this.btnHard.Name = "btnHard";
+            this.btnHard.Size = new System.Drawing.Size(140, 60);
+            this.btnHard.TabIndex = 3;
+            this.btnHard.Click += new System.EventHandler(this.btnHard_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(30, 12);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(140, 60);
+            this.btnBack.TabIndex = 2;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(208)))));
-            this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.minesweeperButton1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(230)))), ((int)(((byte)(215)))));
+            this.ClientSize = new System.Drawing.Size(784, 571);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btnBack);
             this.Name = "Form2";
             this.Text = "Nuclear";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.VisibleChanged += new System.EventHandler(this.Form2_VisibleChanged);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -91,7 +135,11 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button1;
-        private minesweeperButton minesweeperButton1;
+        private minesweeperButton btnBack;
+        private minesweeperButton btnHard;
+        private minesweeperButton btnMedium;
+        private minesweeperButton btnEasy;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
     }
 }

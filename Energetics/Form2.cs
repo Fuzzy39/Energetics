@@ -13,15 +13,38 @@ namespace Energetics
     public partial class Form2 : Form
     {
         Form1 mainForm;
-        MinesweeperTile[,] gameSpace;
-        int gridHeight = 10;
-        int gridWidth = 13;
-        int tileSize = 60;
+        Random rand = new Random();
+        static MinesweeperTile[,] gameSpace;
+
+        // 2:3 240
+        // scale 3 easy
+        // med 5
+        // hard 7
+        static int scale = 3;
+        static int gridHeight = 2*scale;
+        static int gridWidth = 3*scale;
+        static int tileSize = 240/scale;
+
 
         public Form2(Form1 creator)
         {
             InitializeComponent();
 
+            btnBack.lblTile.BackColor = Color.FromArgb(255, 130, 80, 80);
+            btnBack.lblTile.Text = "Back";
+            btnBack.jitters = new bool[] { true, false, false };
+
+            btnEasy.lblTile.BackColor = Color.FromArgb(255, 80, 130, 80);
+            btnEasy.lblTile.Text = "Easy";
+            btnEasy.jitters = new bool[] { false, true, false };
+
+            btnMedium.lblTile.BackColor = Color.FromArgb(255, 130, 130, 80);
+            btnMedium.lblTile.Text = "Medium";
+            btnMedium.jitters = new bool[] { true, true, false };
+
+            btnHard.lblTile.BackColor = Color.FromArgb(255, 130, 80, 80);
+            btnHard.lblTile.Text = "Hard";
+            btnHard.jitters = new bool[] { true, false, false };
 
             mainForm = creator;
         }
@@ -35,34 +58,261 @@ namespace Energetics
             this.Controls.Add(test);
             */
 
+            // setup the button controls
+            // colors
+
 
 
             // this code might be kinda temporary
             // it's purpose is to lay down a grid of minesweeper tiles
-            gameSpace = new MinesweeperTile[gridWidth,gridHeight];
 
-            // loop through all of the tiles
-            /*for(int x = 0; x< gridWidth; x++)
-            {
-                for(int y = 0; y< gridHeight; y++)
-                {
-                   // create a tile at the appropriate location
-                   MinesweeperTile tile = new MinesweeperTile(
-                        tileSize,
-                        new Point(x,y), // position on grid
-                        new Point((tileSize*x), + (tileSize * y)), // position in pixels
-                        ((x+y)%10)-1 // number of neighbors that are bombs, which we will worry about later
-                    );
+            generateMap();
+           
 
-                    // add it to the array and to the controls
-                    this.Controls.Add(tile);
-                    gameSpace[x,y] = tile;
-                }
-            }*/
+            
 
         }
 
+        private void generateMap()
+        {
+            // remove old tiles
+            for (int x = 0; x < gridWidth; x++)
+            {
+                for (int y = 0; y < gridHeight; y++)
+                {
+                    if (gameSpace == null)
+                    {
+                        break;
+                    }
+                    this.Controls.Remove(gameSpace[x, y]);
+                }
+            }
 
+            // set variables
+            gridHeight = 2 * scale;
+            gridWidth = 3 * scale;
+            tileSize = 240 / scale;
+
+            int startX = (800 - tileSize * gridWidth) / 2 - 10;
+            int startY = 90;
+
+            gameSpace = new MinesweeperTile[gridWidth, gridHeight];
+
+            // loop through all of the tiles and make new ones
+
+            for (int x = 0; x < gridWidth; x++)
+            {
+                for (int y = 0; y < gridHeight; y++)
+                {
+                    // create a tile at the appropriate location
+                    MinesweeperTile tile = new MinesweeperTile(
+                         tileSize,
+                         new Point(x, y), // position on grid
+                         new Point((tileSize * x) + startX, +(tileSize * y) + startY), // position in pixels
+                         0/*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
+                     );
+
+                    // add it to the array and to the controls
+                    this.Controls.Add(tile);
+                    gameSpace[x, y] = tile;
+                }
+            }
+
+            // create the mines
+            // really stupid way to determine the number of mines
+            int mines = scale <= 3 ? 8 : scale <= 5 ? 25 : 60;
+
+            for (int i = 0; i < mines; i++)
+            {
+                int xCoord = rand.Next(0, gridWidth);
+                int yCoord = rand.Next(0, gridHeight);
+
+                if (gameSpace[xCoord, yCoord].neighbors == -1)
+                {
+                    i--;
+                    continue;
+                }
+                gameSpace[xCoord, yCoord].neighbors = -1;
+
+            }
+
+            // fill in the other tiles
+
+            for (int x = 0; x < gridWidth; x++)
+            {
+                for (int y = 0; y < gridHeight; y++)
+                {
+                    gameSpace[x,y].neighbors= neighbors(x, y);
+                }
+            }
+        }
+
+        private int neighbors(int x, int y)
+        {
+            // awful code
+            // look in each of the 8 directions for neigbors
+            if(isBomb(x,y))
+            {
+                return -1;
+            }
+
+            int toReturn = 0;
+            if(x!=0&y!=0)
+            {
+                // top left
+                if(isBomb(x-1,y-1))
+                {
+                    toReturn++;
+                }
+            }
+
+            if(x!=0)
+            {
+                // left
+                if (isBomb(x - 1, y))
+                {
+                    toReturn++;
+                }
+            }
+
+            if(x!=0 & y<gridHeight-1)
+            {
+                // bottom left
+                if (isBomb(x - 1, y + 1))
+                {
+                    toReturn++;
+                }
+            }
+
+            if(y!=0)
+            {
+                // top
+                if (isBomb(x , y - 1))
+                {
+                    toReturn++;
+                }
+            }
+
+            if (y < gridHeight - 1)
+            {
+                // bottom
+                if (isBomb(x, y +1))
+                {
+                    toReturn++;
+                }
+            }
+
+            if(x<gridWidth-1 & y!=0)
+            {
+                // Top right
+                if (isBomb(x + 1, y - 1))
+                {
+                    toReturn++;
+                }
+            }
+
+            if(x<gridWidth-1)
+            {
+                // right
+                if (isBomb(x + 1, y))
+                {
+                    toReturn++;
+                }
+
+            }
+
+            if (x<gridWidth-1 & y<gridHeight-1)
+            {
+                //Bottom right
+                if (isBomb(x + 1, y + 1))
+                {
+                    toReturn++;
+                }
+            }
+
+            return toReturn;
+
+        }
+
+       
+        private bool isBomb(int x, int y)
+        {
+            return gameSpace[x, y].neighbors == -1;
+        }
+
+
+        public static void revealAll()
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                for (int y = 0; y < gridHeight; y++)
+                {
+                    gameSpace[x, y].reveal(true);
+                }
+            }
+        }
+
+        public static void revealAdjacent(int x, int y)
+        {
+           
+            int toReturn = 0;
+            if (x != 0 & y != 0)
+            {
+                // top left
+                gameSpace[x - 1, y - 1].reveal(false);
+              
+            }
+
+            if (x != 0)
+            {
+                // left
+                gameSpace[x - 1, y].reveal(false);
+
+            }
+
+            if (x != 0 & y < gridHeight - 1)
+            {
+                // bottom left
+                gameSpace[x - 1, y + 1].reveal(false);
+
+            }
+
+            if (y != 0)
+            {
+                // top
+                gameSpace[x, y - 1].reveal(false);
+            }
+
+            if (y < gridHeight - 1)
+            {
+                // bottom
+                gameSpace[x, y + 1].reveal(false);
+
+            }
+
+            if (x < gridWidth - 1 & y != 0)
+            {
+                // Top right
+                gameSpace[x + 1, y - 1].reveal(false);
+
+            }
+
+            if (x < gridWidth - 1)
+            {
+                // right
+                gameSpace[x + 1, y].reveal(false);
+
+
+            }
+
+            if (x < gridWidth - 1 & y < gridHeight - 1)
+            {
+                //Bottom right
+                gameSpace[x + 1, y + 1].reveal(false);
+
+            }
+
+        }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -77,14 +327,18 @@ namespace Energetics
             // This timer ticks every 32 ms, about 30 times a second
 
             // update every tile.
-           /* for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < gridWidth; x++)
             {
-                for (int y = 0; y < gridHeight; y++)
-                {
-                    
-                    gameSpace[x,y].update();
-                }
-            }*/
+                 for (int y = 0; y < gridHeight; y++)
+                 {
+
+                     gameSpace[x,y].update();
+                 }
+            }
+            btnBack.update();
+            btnEasy.update();
+            btnHard.update();
+            btnMedium.update();
         }
 
         private void Form2_VisibleChanged(object sender, EventArgs e)
@@ -99,7 +353,30 @@ namespace Energetics
             timer1.Stop();
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            // almost certainly temporary code
+            mainForm.Visible = true;
+            mainForm.Focus();
+            this.Visible = false;
+        }
 
-      
+        private void btnEasy_Click(object sender, EventArgs e)
+        {
+            scale = 3;
+            generateMap();
+        }
+
+        private void btnMedium_Click(object sender, EventArgs e)
+        {
+            scale = 5;
+            generateMap();
+        }
+
+        private void btnHard_Click(object sender, EventArgs e)
+        {
+            scale = 7;
+            generateMap();
+        }
     }
 }
