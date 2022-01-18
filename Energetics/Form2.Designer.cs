@@ -117,7 +117,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(230)))), ((int)(((byte)(215)))));
-            this.ClientSize = new System.Drawing.Size(784, 571);
+            this.ClientSize = new System.Drawing.Size(784, 581);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnBack);
             this.Name = "Form2";

@@ -10,26 +10,39 @@ using System.Windows.Forms;
 
 namespace Energetics
 {
+    // Mason Hill, January 13th, 2022 
+    // This code governs how the minesweeper game works, at least in part.
+    // It was written poorly, without careful consideration to any part in particular.
+    // Apolgies in advance to whoever reads this.
+    
     public partial class Form2 : Form
     {
         Form1 mainForm;
         Random rand = new Random();
         static MinesweeperTile[,] gameSpace;
+       
 
         // 2:3 240
         // scale 3 easy
         // med 5
         // hard 7
-        static int scale = 3;
+        static int scale = 3; // higher values cause the minesweeper grid to be bigger.
         static int gridHeight = 2*scale;
         static int gridWidth = 3*scale;
         static int tileSize = 240/scale;
 
+        // this is a workaround to a workaround's workaround, at this point.
+        // this is silly
+        static public int messageOpacity = 0; // from 1 to 100, with a max normal value of 40 
+        static int maxOpacity = 70;
+        static int opacityRate = 10;
+        static public bool panelOn = true;
 
         public Form2(Form1 creator)
         {
             InitializeComponent();
 
+            // set the text for all of my fake buttons
             btnBack.lblTile.BackColor = Color.FromArgb(255, 130, 80, 80);
             btnBack.lblTile.Text = "Back";
             btnBack.jitters = new bool[] { true, false, false };
@@ -47,6 +60,13 @@ namespace Energetics
             btnHard.jitters = new bool[] { true, false, false };
 
             mainForm = creator;
+
+
+
+            // add 'message panel'. it describes the game initially, and announces your victory (or failur
+            //
+           // why didn't it work?
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -57,19 +77,22 @@ namespace Energetics
             test =new MinesweeperTile(80,new Point(), new Point(200, 100), 0);
             this.Controls.Add(test);
             */
-
-            // setup the button controls
-            // colors
-
-
-
-            // this code might be kinda temporary
-            // it's purpose is to lay down a grid of minesweeper tiles
-
-            generateMap();
            
 
-            
+
+
+            generateMap();
+            //lblMessage.BackColor = Color.FromArgb(50, 0, 0, 0);
+
+            /*foreground = new MessagePanel();
+            foreground.BackColor = Color.Black;
+            foreground.Opacity = 0;
+            foreground.Top = 85;
+            foreground.Left = 25;
+            foreground.Size = new Size(730, 490);
+            this.Controls.Add(foreground);
+            foreground.BringToFront();
+            foreground.Enabled = false;*/
 
         }
 
@@ -93,7 +116,7 @@ namespace Energetics
             gridWidth = 3 * scale;
             tileSize = 240 / scale;
 
-            int startX = (800 - tileSize * gridWidth) / 2 - 10;
+            int startX = (800 - tileSize * gridWidth) / 2 - 10; // should always be about 30
             int startY = 90;
 
             gameSpace = new MinesweeperTile[gridWidth, gridHeight];
@@ -119,8 +142,10 @@ namespace Energetics
             }
 
             // create the mines
-            // really stupid way to determine the number of mines
-            int mines = scale <= 3 ? 8 : scale <= 5 ? 25 : 60;
+
+            
+            // Ah, yes, a ternary operator, the best way to create readable code!
+            int mines = scale <= 3 ? 8 : scale <= 5 ? 25 : 55;
 
             for (int i = 0; i < mines; i++)
             {
@@ -150,6 +175,7 @@ namespace Energetics
         private int neighbors(int x, int y)
         {
             // awful code
+            // As long as I don't have to edit it again, it's fine, right?
             // look in each of the 8 directions for neigbors
             if(isBomb(x,y))
             {
@@ -243,6 +269,8 @@ namespace Energetics
 
         public static void revealAll()
         {
+            // this code is called when the player causes a meltdown.
+              
             for (int x = 0; x < gridWidth; x++)
             {
                 for (int y = 0; y < gridHeight; y++)
@@ -250,11 +278,14 @@ namespace Energetics
                     gameSpace[x, y].reveal(true);
                 }
             }
+            panelOn = true;
         }
 
         public static void revealAdjacent(int x, int y)
         {
            
+            // again, terrible code.
+            // This is a short project though, so eh.
             int toReturn = 0;
             if (x != 0 & y != 0)
             {
@@ -326,6 +357,39 @@ namespace Energetics
 
             // This timer ticks every 32 ms, about 30 times a second
 
+            // adjust the panel, if so required.
+
+            if (panelOn)
+            {
+                //foreground.Enabled = true; // any time the panel is even slightly visible, we disable interactivity with the game.
+                if (messageOpacity < maxOpacity)
+                {
+                    messageOpacity += opacityRate;
+                    if (messageOpacity > maxOpacity)
+                    {
+                        messageOpacity = maxOpacity;
+                    }
+                }
+            }
+            else
+            {
+                if(messageOpacity==0)
+                {
+                   // foreground.Enabled = false;
+                    
+                }
+                else
+                {
+                    messageOpacity -= opacityRate;
+                    if(messageOpacity<0)
+                    {
+                        messageOpacity = 0;
+                    }
+                }
+            }
+
+            //foreground.Opacity = messageOpacity;
+
             // update every tile.
             for (int x = 0; x < gridWidth; x++)
             {
@@ -339,6 +403,9 @@ namespace Energetics
             btnEasy.update();
             btnHard.update();
             btnMedium.update();
+
+            
+            
         }
 
         private void Form2_VisibleChanged(object sender, EventArgs e)
@@ -363,18 +430,21 @@ namespace Energetics
 
         private void btnEasy_Click(object sender, EventArgs e)
         {
+            panelOn = false;
             scale = 3;
             generateMap();
         }
 
         private void btnMedium_Click(object sender, EventArgs e)
         {
+            panelOn = false;
             scale = 5;
             generateMap();
         }
 
         private void btnHard_Click(object sender, EventArgs e)
         {
+            panelOn = false ;
             scale = 7;
             generateMap();
         }

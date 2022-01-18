@@ -67,6 +67,7 @@ namespace Energetics
             
 
             determineBrightness();
+            //int panelModifier = (int)((((double)Form2.messageOpacity) / 100.0) * 255);
             red += brightness;
             green += brightness;
             blue += brightness;
