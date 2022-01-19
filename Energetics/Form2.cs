@@ -194,12 +194,19 @@ namespace Energetics
             // okay, this is going to be the worst code yet, I'm pretty sure
             // remove bombs from this tile and it's neighbors, then recalculate.
             gameStarted = true;
-            gameSpace[x, y].neighbors = 0;
+            if (isBomb(x , y))
+            {
+                gameSpace[x, y].neighbors = 0;
+                bombs--;
+            }
             if (x != 0 & y != 0)
             {
                 // top left
                 if (isBomb(x - 1, y - 1))
-                    gameSpace[x - 1, y - 1].neighbors=0;
+                {
+                    gameSpace[x - 1, y - 1].neighbors = 0;
+                    bombs--;
+                }
 
             }
 
@@ -207,7 +214,10 @@ namespace Energetics
             {
                 // left
                 if (isBomb(x - 1, y))
+                {
                     gameSpace[x - 1, y].neighbors = 0;
+                    bombs--;
+                }
 
             }
 
@@ -215,15 +225,22 @@ namespace Energetics
             {
                 // bottom left
                 if (isBomb(x - 1, y + 1))
+                {
+
+                    bombs--;
                     gameSpace[x - 1, y + 1].neighbors = 0;
+                }
 
             }
 
             if (y != 0)
             {
                 // top
-                if (isBomb(x , y - 1))
+                if (isBomb(x, y - 1))
+                {
+                    bombs--;
                     gameSpace[x, y - 1].neighbors = 0;
+                }
             }
 
             if (y < gridHeight - 1)
@@ -231,7 +248,11 @@ namespace Energetics
                 // bottom
 
                 if (isBomb(x, y + 1))
+                {
+                    bombs--;
+
                     gameSpace[x, y + 1].neighbors = 0;
+                }
                 
 
             }
@@ -240,14 +261,21 @@ namespace Energetics
             {
                 // Top right
                 if (isBomb(x + 1, y - 1))
+                {
+
+                    bombs--;
                     gameSpace[x + 1, y - 1].neighbors = 0;
+                }
             }
 
             if (x < gridWidth - 1)
             {
                 // right
                 if (isBomb(x + 1, y))
+                {
+                    bombs--;
                     gameSpace[x + 1, y].neighbors = 0;
+                }
 
 
             }
@@ -255,8 +283,12 @@ namespace Energetics
             if (x < gridWidth - 1 & y < gridHeight - 1)
             {
                 //Bottom right
-                if(isBomb(x+1,y+1))
-                gameSpace[x + 1, y + 1].neighbors = 0;
+                if (isBomb(x + 1, y + 1))
+                {
+                    bombs--;
+
+                    gameSpace[x + 1, y + 1].neighbors = 0;
+                }
 
             }
             // recalculate (should be a method, yeah?)
