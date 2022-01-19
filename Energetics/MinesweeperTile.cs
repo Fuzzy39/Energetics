@@ -250,6 +250,7 @@ namespace Energetics
                 return;
             }
 
+            
             brightness = 150;
             brightnessChange = 0;
             revealed = true;
@@ -260,6 +261,10 @@ namespace Energetics
                 if (!isBomb)
                     Form2.revealAll();
                 return;
+            }
+            if(!isBomb)
+            {
+                Form2.checkForWin();
             }
             if (neighbors == 0)
             {

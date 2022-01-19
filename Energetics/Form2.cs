@@ -30,6 +30,9 @@ namespace Energetics
         static int gridHeight = 2*scale;
         static int gridWidth = 3*scale;
         static int tileSize = 240/scale;
+        static int tiles = gridHeight * gridWidth;
+        static int revealed = 0;
+        static int bombs = 0;
 
         // this is a workaround to a workaround's workaround, at this point.
         // this is silly
@@ -115,6 +118,8 @@ namespace Energetics
             gridHeight = 2 * scale;
             gridWidth = 3 * scale;
             tileSize = 240 / scale;
+            tiles = gridHeight * gridWidth;
+            revealed = 0;
 
             int startX = (800 - tileSize * gridWidth) / 2 - 10; // should always be about 30
             int startY = 90;
@@ -146,7 +151,7 @@ namespace Energetics
             
             // Ah, yes, a ternary operator, the best way to create readable code!
             int mines = scale <= 3 ? 8 : scale <= 5 ? 25 : 55;
-
+            bombs = mines;
             for (int i = 0; i < mines; i++)
             {
                 int xCoord = rand.Next(0, gridWidth);
@@ -171,7 +176,15 @@ namespace Energetics
                 }
             }
         }
-
+        public static void checkForWin()
+        {
+            revealed++;
+            if(revealed+bombs==tiles)
+            {
+                // victory achived!
+                panelOn = true;
+            }
+        }
         private int neighbors(int x, int y)
         {
             // awful code
