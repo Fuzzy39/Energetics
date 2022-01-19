@@ -80,6 +80,8 @@ namespace Energetics
             }
 
             btnReturn.Visible = true;
+            lblWinOrLose.Visible = true;
+
         }
 
         private void PlaceBlocks()
@@ -99,7 +101,7 @@ namespace Energetics
 
                 if (a == 8)
                 {
-                    top = top + 50;
+                    top = top + 35;
                     left = 8;
                     a = 0;
                 }
@@ -140,8 +142,10 @@ namespace Energetics
             {
                 lbl_Score.Text = "You have made " + score + " collisions!";
             }
-            
-            
+
+            //keyisup();
+            //keyisup();
+
             if (moveLeft == true && player.Left > 0)
             {
                 player.Left -= playerSpeed;
@@ -255,6 +259,9 @@ namespace Energetics
             
             this.Hide();
             mainForm.Visible = true;
+
+            lblWinOrLose.Visible = false;
+            lbl_Score.Text = ""; ;
         }
 
         private void btnStart_Click(object sender, EventArgs e)

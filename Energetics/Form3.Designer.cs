@@ -98,12 +98,14 @@
             // 
             // lblWinOrLose
             // 
+            this.lblWinOrLose.BackColor = System.Drawing.Color.Transparent;
             this.lblWinOrLose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWinOrLose.Location = new System.Drawing.Point(282, 236);
             this.lblWinOrLose.Name = "lblWinOrLose";
             this.lblWinOrLose.Size = new System.Drawing.Size(282, 31);
             this.lblWinOrLose.TabIndex = 7;
             this.lblWinOrLose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWinOrLose.Visible = false;
             // 
             // Form3
             // 
@@ -117,8 +119,9 @@
             this.Controls.Add(this.ball);
             this.Controls.Add(this.player);
             this.Controls.Add(this.lbl_Score);
+            this.KeyPreview = true;
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Heat Energy";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.VisibleChanged += new System.EventHandler(this.Form3_VisibleChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyisdown);
