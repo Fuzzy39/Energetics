@@ -180,37 +180,37 @@ namespace Energetics
             this.BackColor = opacityDarken(Color.White);
             if (Form2.panelOn)
             {
-                interactable= false;
+                interactable = false;
             }
             else
             {
-                interactable= true;
+                interactable = true;
             }
         }
 
         private void lblTile_MouseEnter(object sender, EventArgs e)
         {
-            if(interactable)
+            if (interactable)
                 isHovered = true;
-       
+
         }
 
         private void lblTile_MouseLeave(object sender, EventArgs e)
         {
-            
+
             isHovered = false;
-           
+
         }
 
         private void lblTile_Click(object sender, EventArgs e)
         {
             // can you detect a right click?
             // yes!
-            if(!interactable)
+            if (!interactable)
             {
                 return;
             }
-                
+
             MouseEventArgs me = (MouseEventArgs)e;
             if (me.Button == MouseButtons.Right)
             {
@@ -250,7 +250,7 @@ namespace Energetics
                 return;
             }
 
-            
+
             brightness = 150;
             brightnessChange = 0;
             revealed = true;
@@ -262,7 +262,7 @@ namespace Energetics
                     Form2.revealAll();
                 return;
             }
-            if(!isBomb)
+            if (!isBomb)
             {
                 Form2.checkForWin();
             }

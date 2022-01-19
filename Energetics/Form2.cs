@@ -43,6 +43,7 @@ namespace Energetics
 
         public Form2(Form1 creator)
         {
+            this.Opacity = .5;
             InitializeComponent();
 
             // set the text for all of my fake buttons

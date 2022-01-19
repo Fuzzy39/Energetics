@@ -37,6 +37,7 @@
             this.btnEasy = new Energetics.minesweeperButton();
             this.btnHard = new Energetics.minesweeperButton();
             this.btnBack = new Energetics.minesweeperButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,12 +113,24 @@
             this.btnBack.TabIndex = 2;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Arial Black", 19F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(382, 205);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(115, 77);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "New Game";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(230)))), ((int)(((byte)(215)))));
             this.ClientSize = new System.Drawing.Size(784, 581);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnBack);
             this.Name = "Form2";
@@ -141,5 +154,6 @@
         private minesweeperButton btnEasy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
     }
 }
