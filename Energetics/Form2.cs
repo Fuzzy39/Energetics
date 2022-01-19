@@ -24,8 +24,8 @@ namespace Energetics
 
         // 2:3 240
         // scale 3 easy
-        // med 5
-        // hard 7
+        // med 4
+        // hard 5
         static int scale = 3; // higher values cause the minesweeper grid to be bigger.
         static int gridHeight = 2*scale;
         static int gridWidth = 3*scale;
@@ -33,6 +33,7 @@ namespace Energetics
         static int tiles = gridHeight * gridWidth;
         static int revealed = 0;
         static int bombs = 0;
+        static public bool gameStarted = false;
 
         // this is a workaround to a workaround's workaround, at this point.
         // this is silly
@@ -86,8 +87,7 @@ namespace Energetics
 
 
             generateMap();
-            lblTest.BringToFront();
-            lblTest.Opacity = 100;
+         
             //lblMessage.BackColor = Color.FromArgb(50, 0, 0, 0);
 
             /*foreground = new MessagePanel();
@@ -152,8 +152,8 @@ namespace Energetics
             // create the mines
 
             
-            // Ah, yes, a ternary operator, the best way to create readable code!
-            int mines = scale <= 3 ? 8 : scale <= 5 ? 25 : 55;
+            
+            int mines = (scale*scale*6)/5;
             bombs = mines;
             for (int i = 0; i < mines; i++)
             {
@@ -188,7 +188,88 @@ namespace Energetics
                 panelOn = true;
             }
         }
-        private int neighbors(int x, int y)
+
+        public static void startGame(int x, int y)
+        {
+            // okay, this is going to be the worst code yet, I'm pretty sure
+            // remove bombs from this tile and it's neighbors, then recalculate.
+            gameStarted = true;
+            gameSpace[x, y].neighbors = 0;
+            if (x != 0 & y != 0)
+            {
+                // top left
+                if (isBomb(x - 1, y - 1))
+                    gameSpace[x - 1, y - 1].neighbors=0;
+
+            }
+
+            if (x != 0)
+            {
+                // left
+                if (isBomb(x - 1, y))
+                    gameSpace[x - 1, y].neighbors = 0;
+
+            }
+
+            if (x != 0 & y < gridHeight - 1)
+            {
+                // bottom left
+                if (isBomb(x - 1, y + 1))
+                    gameSpace[x - 1, y + 1].neighbors = 0;
+
+            }
+
+            if (y != 0)
+            {
+                // top
+                if (isBomb(x , y - 1))
+                    gameSpace[x, y - 1].neighbors = 0;
+            }
+
+            if (y < gridHeight - 1)
+            {
+                // bottom
+
+                if (isBomb(x, y + 1))
+                    gameSpace[x, y + 1].neighbors = 0;
+                
+
+            }
+
+            if (x < gridWidth - 1 & y != 0)
+            {
+                // Top right
+                if (isBomb(x + 1, y - 1))
+                    gameSpace[x + 1, y - 1].neighbors = 0;
+            }
+
+            if (x < gridWidth - 1)
+            {
+                // right
+                if (isBomb(x + 1, y))
+                    gameSpace[x + 1, y].neighbors = 0;
+
+
+            }
+
+            if (x < gridWidth - 1 & y < gridHeight - 1)
+            {
+                //Bottom right
+                if(isBomb(x+1,y+1))
+                gameSpace[x + 1, y + 1].neighbors = 0;
+
+            }
+            // recalculate (should be a method, yeah?)
+            for (int x2 = 0; x2 < gridWidth; x2++)
+            {
+                for (int y2 = 0; y2 < gridHeight; y2++)
+                {
+                    gameSpace[x2, y2].neighbors = neighbors(x2, y2);
+                }
+            }
+        }
+
+        private static int neighbors(int x, int y)
         {
             // awful code
             // As long as I don't have to edit it again, it's fine, right?
@@ -277,7 +358,7 @@ namespace Energetics
         }
 
        
-        private bool isBomb(int x, int y)
+        private static bool isBomb(int x, int y)
         {
             return gameSpace[x, y].neighbors == -1;
         }
@@ -447,6 +528,7 @@ namespace Energetics
         private void btnEasy_Click(object sender, EventArgs e)
         {
             panelOn = false;
+            gameStarted = false;
             scale = 3;
             generateMap();
         }
@@ -454,14 +536,16 @@ namespace Energetics
         private void btnMedium_Click(object sender, EventArgs e)
         {
             panelOn = false;
-            scale = 5;
+            gameStarted = false;
+            scale = 4;
             generateMap();
         }
 
         private void btnHard_Click(object sender, EventArgs e)
         {
             panelOn = false ;
-            scale = 7;
+            gameStarted = false;
+            scale = 5;
             generateMap();
         }
     }

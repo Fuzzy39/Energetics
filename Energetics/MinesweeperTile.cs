@@ -250,6 +250,13 @@ namespace Energetics
                 return;
             }
 
+            // make sure there are no bombs in the vicinity
+            if(!Form2.gameStarted)
+            {
+                Form2.startGame(gridLocation.X, gridLocation.Y);
+
+
+            }
 
             brightness = 150;
             brightnessChange = 0;

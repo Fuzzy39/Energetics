@@ -33,7 +33,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblTest = new Energetics.TransparentLabel();
             this.btnMedium = new Energetics.minesweeperButton();
             this.btnEasy = new Energetics.minesweeperButton();
             this.btnHard = new Energetics.minesweeperButton();
@@ -76,18 +75,8 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(562, 82);
             this.panel1.TabIndex = 8;
-            // 
-            // lblTest
-            // 
-            this.lblTest.BackColor = System.Drawing.Color.Transparent;
-            this.lblTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTest.ForeColor = System.Drawing.Color.White;
-            this.lblTest.Location = new System.Drawing.Point(438, 50);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Opacity = 100;
-            this.lblTest.Size = new System.Drawing.Size(347, 181);
-            this.lblTest.TabIndex = 9;
-            this.lblTest.Text = "Text!";
+     
+       
             // 
             // btnMedium
             // 
@@ -131,7 +120,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(230)))), ((int)(((byte)(215)))));
             this.ClientSize = new System.Drawing.Size(784, 581);
-            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnBack);
             this.Name = "Form2";
@@ -155,6 +143,6 @@
         private minesweeperButton btnEasy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
-        private TransparentLabel lblTest;
+       
     }
 }
