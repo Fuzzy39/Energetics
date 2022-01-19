@@ -120,6 +120,18 @@
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="lblTutorial.Text" xml:space="preserve">
+    <value>You are a Nuclear Safety Engineer, and you have been hired to find the safe configurations of out new powerplant.
+Experimentally.
+
+You will shortly be presented with a grid of possible configurations for our nuclear plant. 
+Left clicking on a tile will have us test the power plant with those configurations. The number on each configuration describes how many of the 8 adjacent configurations would result in a meltdown.
+If you'd like, you can right click on a tile to 'flag' it, if you think it might be dangerous.
+Your job is done when you have tested all safe configurations of our Nuclear Plant.
+
+Click a difficulty above to get started.
+Best of luck! Try not to get anybody's face melted off, would you? </value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

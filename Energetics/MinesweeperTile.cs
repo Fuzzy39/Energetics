@@ -156,11 +156,16 @@ namespace Energetics
             double red = c.R;
             double blue = c.B;
             double green = c.G;
+
+            double red2 = 115;
+            double green2 = 130;
+            double blue2 = 115;
+
             double darkenBy = ((double)Form2.messageOpacity) / 100.0;
 
-            red /= 1 + darkenBy;
-            blue /= 1 + darkenBy;
-            green /= 1 + darkenBy;
+            red = red * (1 - darkenBy) + red2 * darkenBy;
+            green = green * (1 - darkenBy) + green2 * darkenBy;
+            blue = blue * (1 - darkenBy) + blue2 * darkenBy;
 
             // ensure that the color is not invalid
             if (red > 255) red = 255;

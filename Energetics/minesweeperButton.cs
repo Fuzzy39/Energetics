@@ -54,7 +54,7 @@ namespace Energetics
         {
             // totally not directly copied from Minesweeper tile.
             // What? who said I had to write good code?
-            colorFrame += colorFrameRate;
+            colorFrame += colorFrameRate + (Form2.panelOn?.1:0);
            
             lblTile.BackColor = determineColor(colorFrame);
             

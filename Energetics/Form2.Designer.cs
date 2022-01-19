@@ -32,6 +32,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label3 = new System.Windows.Forms.Label();
@@ -120,13 +121,15 @@
             // lblTutorial
             // 
             this.lblTutorial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(130)))), ((int)(((byte)(115)))));
-            this.lblTutorial.Font = new System.Drawing.Font("Arial", 17F);
+            this.lblTutorial.Font = new System.Drawing.Font("Calibri", 16F);
             this.lblTutorial.ForeColor = System.Drawing.Color.White;
             this.lblTutorial.Location = new System.Drawing.Point(30, 90);
+            this.lblTutorial.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.lblTutorial.Name = "lblTutorial";
+            this.lblTutorial.Padding = new System.Windows.Forms.Padding(20);
             this.lblTutorial.Size = new System.Drawing.Size(720, 480);
             this.lblTutorial.TabIndex = 10;
-            this.lblTutorial.Text = "The game has been explained.";
+            this.lblTutorial.Text = resources.GetString("lblTutorial.Text");
             // 
             // Form2
             // 

@@ -36,12 +36,13 @@ namespace Energetics
         static int revealed = 0;
         static int bombs = 0;
         static public bool gameStarted = false;
+        static bool tutorial = true;
 
         // this is a workaround to a workaround's workaround, at this point.
         // this is silly
-        static public int messageOpacity = 0; // from 1 to 100
-        static int maxOpacity = 70;
-        static int opacityRate = 10;
+        static public int messageOpacity = 100; // from 1 to 100
+        static int maxOpacity = 100;
+        static int opacityRate = 5;
         static public bool panelOn = true;
         //static bool tutorial = true;
 
@@ -480,7 +481,7 @@ namespace Energetics
             // This timer ticks every 32 ms, about 30 times a second
 
             // adjust the panel, if so required.
-
+            
             if (panelOn)
             {
                 //foreground.Enabled = true; // any time the panel is even slightly visible, we disable interactivity with the game.
@@ -492,10 +493,23 @@ namespace Energetics
                         messageOpacity = maxOpacity;
                     }
                 }
+                if(messageOpacity==maxOpacity)
+                {
+                    if(tutorial)
+                    {
+                        lblTutorial.Visible = true;
+                    }
+                    else
+                    {
+                        lblTutorial.Visible = false;
+                    }
+                }
+
             }
             else
             {
-                if(messageOpacity==0)
+                lblTutorial.Visible = false;
+                if (messageOpacity==0)
                 {
                    // foreground.Enabled = false;
                     
@@ -552,7 +566,9 @@ namespace Energetics
             this.Visible = false;
             panelOn = true;
             gameStarted = false;
+            tutorial = true;
             scale = 3;
+            messageOpacity = 100;
             generateMap();
         }
 
@@ -560,6 +576,8 @@ namespace Energetics
         {
             panelOn = false;
             gameStarted = false;
+            tutorial = false;
+
             scale = 3;
             generateMap();
         }
@@ -568,6 +586,7 @@ namespace Energetics
         {
             panelOn = false;
             gameStarted = false;
+            tutorial = false;
             scale = 4;
             generateMap();
         }
@@ -576,6 +595,7 @@ namespace Energetics
         {
             panelOn = false ;
             gameStarted = false;
+            tutorial = false;
             scale = 5;
             generateMap();
         }
