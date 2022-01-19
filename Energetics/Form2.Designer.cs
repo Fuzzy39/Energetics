@@ -114,6 +114,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(140, 60);
             this.btnBack.TabIndex = 2;
+            this.btnBack.Load += new System.EventHandler(this.btnBack_Load);
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // lblTutorial

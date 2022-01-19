@@ -579,5 +579,10 @@ namespace Energetics
             scale = 5;
             generateMap();
         }
+
+        private void btnBack_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
