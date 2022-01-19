@@ -78,6 +78,9 @@
     <Compile Include="MinesweeperTile.Designer.cs">
       <DependentUpon>MinesweeperTile.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransparentLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

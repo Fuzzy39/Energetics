@@ -43,7 +43,7 @@ namespace Energetics
 
         public Form2(Form1 creator)
         {
-            this.Opacity = .5;
+            
             InitializeComponent();
 
             // set the text for all of my fake buttons
@@ -86,6 +86,8 @@ namespace Energetics
 
 
             generateMap();
+            lblTest.BringToFront();
+            lblTest.Opacity = 100;
             //lblMessage.BackColor = Color.FromArgb(50, 0, 0, 0);
 
             /*foreground = new MessagePanel();
