@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Energetics
 {
+    // January 13th, 2022 - Mason Hill
+    // This code governs the buttons in the minesweeper game.
+    // it is fairly directly coppied from the earlier minesweeper button code, which isn't exactly good practice.
     public partial class minesweeperButton : UserControl
     {
         // should minesweeper tile inherit from this?

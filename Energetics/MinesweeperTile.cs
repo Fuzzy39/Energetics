@@ -5,7 +5,8 @@ using System.Windows.Forms;
 namespace Energetics
 {
     // January 13th, Mason Hill
-    // This code makes the tiles in the minesweeper game behave, and gives them color
+    // This code makes the tiles in the minesweeper game behave, and gives them color.
+    // It's a bit of a mess.
     public partial class MinesweeperTile : UserControl
     {
         // 'settings'
@@ -38,9 +39,9 @@ namespace Energetics
             //baseReds = new int[]  { 55,  230, 135, 40,  70,  100, 130, 160, 160, 160, 160};
             //baseGreens = new int[]{ 135, 20,  135, 40,  70,  100, 130, 160, 120, 80,  40};
             //baseBlues = new int[] { 55,  20,  135, 160, 130, 100, 70,  40,  40,  40,  40};
-            baseReds = new int[] { 110, 230, 120, 40, 40, 160, 160, 160, 120, 80, 20 };
-            baseGreens = new int[] { 150, 20, 120, 40, 160, 160, 120, 40, 40, 30, 20 };
-            baseBlues = new int[] { 110, 20, 120, 160, 40, 40, 40, 40, 40, 30, 20 };
+            baseReds = new int[] { 110, 230, 150, 40, 40, 160, 160, 160, 120, 80, 20 };
+            baseGreens = new int[] { 170, 20, 150, 40, 160, 160, 120, 40, 40, 30, 20 };
+            baseBlues = new int[] { 110, 20, 150, 160, 40, 40, 40, 40, 40, 30, 20 };
             this.gridLocation = gridLocation;
             this.Location = location;
             this.neighbors = neighbors;

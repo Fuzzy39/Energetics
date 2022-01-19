@@ -14,6 +14,8 @@ namespace Energetics
     // This code governs how the minesweeper game works, at least in part.
     // It was written poorly, without careful consideration to any part in particular.
     // Apolgies in advance to whoever reads this.
+    // Not my best work, code wise, but this was a shorter project, so I suppose it's less important.
+    // It's just an unpleasant read.
     
     public partial class Form2 : Form
     {
@@ -37,17 +39,18 @@ namespace Energetics
 
         // this is a workaround to a workaround's workaround, at this point.
         // this is silly
-        static public int messageOpacity = 0; // from 1 to 100, with a max normal value of 40 
+        static public int messageOpacity = 0; // from 1 to 100
         static int maxOpacity = 70;
         static int opacityRate = 10;
         static public bool panelOn = true;
+        //static bool tutorial = true;
 
         public Form2(Form1 creator)
         {
-            
+                
             InitializeComponent();
 
-            // set the text for all of my fake buttons
+            // set the text for all of my 'fake' buttons
             btnBack.lblTile.BackColor = Color.FromArgb(255, 130, 80, 80);
             btnBack.lblTile.Text = "Back";
             btnBack.jitters = new bool[] { true, false, false };
@@ -68,10 +71,6 @@ namespace Energetics
 
 
 
-            // add 'message panel'. it describes the game initially, and announces your victory (or failur
-            //
-           // why didn't it work?
-
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -88,17 +87,7 @@ namespace Energetics
 
             generateMap();
          
-            //lblMessage.BackColor = Color.FromArgb(50, 0, 0, 0);
-
-            /*foreground = new MessagePanel();
-            foreground.BackColor = Color.Black;
-            foreground.Opacity = 0;
-            foreground.Top = 85;
-            foreground.Left = 25;
-            foreground.Size = new Size(730, 490);
-            this.Controls.Add(foreground);
-            foreground.BringToFront();
-            foreground.Enabled = false;*/
+           
 
         }
 
@@ -140,7 +129,7 @@ namespace Energetics
                          tileSize,
                          new Point(x, y), // position on grid
                          new Point((tileSize * x) + startX, +(tileSize * y) + startY), // position in pixels
-                         0/*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
+                         0 /*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
                      );
 
                     // add it to the array and to the controls
@@ -153,7 +142,7 @@ namespace Energetics
 
             
             
-            int mines = (scale*scale*6)/5;
+            int mines = (scale*scale*6)/5; // perhaps a bit esoteric, but ensures the same density of bombs regardless of map size.
             bombs = mines;
             for (int i = 0; i < mines; i++)
             {
@@ -193,12 +182,14 @@ namespace Energetics
         {
             // okay, this is going to be the worst code yet, I'm pretty sure
             // remove bombs from this tile and it's neighbors, then recalculate.
+            // this is to give the player a good starting position the first time they click.
             gameStarted = true;
             if (isBomb(x , y))
             {
                 gameSpace[x, y].neighbors = 0;
                 bombs--;
             }
+
             if (x != 0 & y != 0)
             {
                 // top left
@@ -306,6 +297,7 @@ namespace Energetics
             // awful code
             // As long as I don't have to edit it again, it's fine, right?
             // look in each of the 8 directions for neigbors
+            // This method returns the number of bombs that neighbor this tile.
             if(isBomb(x,y))
             {
                 return -1;
@@ -392,6 +384,7 @@ namespace Energetics
        
         private static bool isBomb(int x, int y)
         {
+            // is this tile a bomb?
             return gameSpace[x, y].neighbors == -1;
         }
 
@@ -528,6 +521,7 @@ namespace Energetics
                      gameSpace[x,y].update();
                  }
             }
+            // update the buttons! They need to sparkle and shine too!
             btnBack.update();
             btnEasy.update();
             btnHard.update();
@@ -552,6 +546,7 @@ namespace Energetics
         private void btnBack_Click(object sender, EventArgs e)
         {
             // almost certainly temporary code
+            // Huh, it wasn't
             mainForm.Visible = true;
             mainForm.Focus();
             this.Visible = false;

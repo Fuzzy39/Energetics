@@ -2,6 +2,9 @@
 {
     partial class Form2
     {
+        // This code governs much of the visual apperance of many of the UI elements in the Minesweeper game.
+        // It was generated using Visual Studio's winform designer, and has been minimally tampered by human hands.
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -37,6 +40,7 @@
             this.btnEasy = new Energetics.minesweeperButton();
             this.btnHard = new Energetics.minesweeperButton();
             this.btnBack = new Energetics.minesweeperButton();
+            this.lblTutorial = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,8 +79,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(562, 82);
             this.panel1.TabIndex = 8;
-     
-       
             // 
             // btnMedium
             // 
@@ -114,12 +116,24 @@
             this.btnBack.TabIndex = 2;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // lblTutorial
+            // 
+            this.lblTutorial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(130)))), ((int)(((byte)(115)))));
+            this.lblTutorial.Font = new System.Drawing.Font("Arial", 17F);
+            this.lblTutorial.ForeColor = System.Drawing.Color.White;
+            this.lblTutorial.Location = new System.Drawing.Point(30, 90);
+            this.lblTutorial.Name = "lblTutorial";
+            this.lblTutorial.Size = new System.Drawing.Size(720, 480);
+            this.lblTutorial.TabIndex = 10;
+            this.lblTutorial.Text = "The game has been explained.";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(230)))), ((int)(((byte)(215)))));
             this.ClientSize = new System.Drawing.Size(784, 581);
+            this.Controls.Add(this.lblTutorial);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnBack);
             this.Name = "Form2";
@@ -143,6 +157,6 @@
         private minesweeperButton btnEasy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
-       
+        private System.Windows.Forms.Label lblTutorial;
     }
 }
