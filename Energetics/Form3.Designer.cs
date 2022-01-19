@@ -60,7 +60,7 @@
             // 
             // timer
             // 
-            this.timer.Interval = 20;
+            this.timer.Interval = 32;
             this.timer.Tick += new System.EventHandler(this.mainGameTimerEvent);
             // 
             // btnReturn
