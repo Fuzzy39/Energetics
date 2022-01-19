@@ -11,9 +11,9 @@ namespace Energetics
     {
         // 'settings'
 
-        private int[] baseReds = { 55, 180 };
-        private int[] baseGreens = { 135, 20 };
-        private int[] baseBlues = { 55 };
+        private int[] baseReds;
+        private int[] baseGreens;
+        private int[] baseBlues;
         private const int colorRange = 25;
         private double colorFrame = 0;
         private double colorFrameRate = .03;
@@ -177,6 +177,16 @@ namespace Energetics
             if (blue < 0) blue = 0;
 
             return Color.FromArgb(255, (int)red, (int)green, (int)blue);
+        }
+        public void reset()
+        {
+            revealed = false;
+            flagged = false;
+            neighbors = 0;
+            lblTile.Text = "";
+            determineColor(colorFrame);
+
+
         }
 
         public void update()

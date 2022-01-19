@@ -95,16 +95,29 @@ namespace Energetics
         private void generateMap()
         {
             // remove old tiles
-            for (int x = 0; x < gridWidth; x++)
+            bool newMap = false;
+           
+            if (2*scale != gridHeight)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int x = 0; x < gridWidth; x++)
                 {
-                    if (gameSpace == null)
+                    for (int y = 0; y < gridHeight; y++)
                     {
-                        break;
+                        if (gameSpace == null)
+                        {
+                            newMap = true;
+                            break;
+                        }
+                        this.Controls.Remove(gameSpace[x, y]);
                     }
-                    this.Controls.Remove(gameSpace[x, y]);
                 }
+                newMap = true;
+            }
+
+            if (gameSpace == null)
+            {
+                newMap = true;
+               
             }
 
             // set variables
@@ -117,25 +130,45 @@ namespace Energetics
             int startX = (800 - tileSize * gridWidth) / 2 - 10; // should always be about 30
             int startY = 90;
 
-            gameSpace = new MinesweeperTile[gridWidth, gridHeight];
-
             // loop through all of the tiles and make new ones
-
-            for (int x = 0; x < gridWidth; x++)
+            if (newMap)
             {
-                for (int y = 0; y < gridHeight; y++)
-                {
-                    // create a tile at the appropriate location
-                    MinesweeperTile tile = new MinesweeperTile(
-                         tileSize,
-                         new Point(x, y), // position on grid
-                         new Point((tileSize * x) + startX, +(tileSize * y) + startY), // position in pixels
-                         0 /*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
-                     );
 
-                    // add it to the array and to the controls
-                    this.Controls.Add(tile);
-                    gameSpace[x, y] = tile;
+                
+
+
+                gameSpace = new MinesweeperTile[gridWidth, gridHeight];
+
+                for (int x = 0; x < gridWidth; x++)
+                {
+                    for (int y = 0; y < gridHeight; y++)
+                    {
+                        // create a tile at the appropriate location
+                        MinesweeperTile tile = new MinesweeperTile(
+                             tileSize,
+                             new Point(x, y), // position on grid
+                             new Point((tileSize * x) + startX, +(tileSize * y) + startY), // position in pixels
+                             0 /*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
+                         );
+
+                        // add it to the array and to the controls
+                        this.Controls.Add(tile);
+                        gameSpace[x, y] = tile;
+                    }
+                }
+            }
+            else
+            {
+                // reset the map.
+                for (int x = 0; x < gridWidth; x++)
+                {
+                    for (int y = 0; y < gridHeight; y++)
+                    {
+                        // create a tile at the appropriate location
+                        gameSpace[x, y].reset();
+
+                     
+                    }
                 }
             }
 
@@ -175,6 +208,7 @@ namespace Energetics
             if(revealed+bombs==tiles)
             {
                 // victory achived!
+                //lblOutcome.Text = "Success!";
                 panelOn = true;
             }
         }
@@ -393,7 +427,8 @@ namespace Energetics
         public static void revealAll()
         {
             // this code is called when the player causes a meltdown.
-              
+            // this code is called when the player causes a meltdown
+            
             for (int x = 0; x < gridWidth; x++)
             {
                 for (int y = 0; y < gridHeight; y++)
@@ -498,10 +533,12 @@ namespace Energetics
                     if(tutorial)
                     {
                         lblTutorial.Visible = true;
+                        lblOutcome.Visible = false;
                     }
                     else
                     {
                         lblTutorial.Visible = false;
+                        lblOutcome.Visible = true;
                     }
                 }
 
@@ -509,6 +546,7 @@ namespace Energetics
             else
             {
                 lblTutorial.Visible = false;
+                lblOutcome.Visible = false;
                 if (messageOpacity==0)
                 {
                    // foreground.Enabled = false;
@@ -561,12 +599,15 @@ namespace Energetics
         {
             // almost certainly temporary code
             // Huh, it wasn't
+            // ought to be, it's kinda messy
             mainForm.Visible = true;
             mainForm.Focus();
             this.Visible = false;
             panelOn = true;
             gameStarted = false;
             tutorial = true;
+            lblOutcome.Visible = false;
+            lblTutorial.Visible = true;
             scale = 3;
             messageOpacity = 100;
             generateMap();
@@ -577,7 +618,8 @@ namespace Energetics
             panelOn = false;
             gameStarted = false;
             tutorial = false;
-
+            lblOutcome.Visible = false;
+            lblTutorial.Visible = false;
             scale = 3;
             generateMap();
         }
@@ -587,6 +629,8 @@ namespace Energetics
             panelOn = false;
             gameStarted = false;
             tutorial = false;
+            lblOutcome.Visible = false;
+            lblTutorial.Visible = false;
             scale = 4;
             generateMap();
         }
@@ -596,6 +640,8 @@ namespace Energetics
             panelOn = false ;
             gameStarted = false;
             tutorial = false;
+            lblOutcome.Visible = false;
+            lblTutorial.Visible = false;
             scale = 5;
             generateMap();
         }
