@@ -26,7 +26,7 @@ namespace Energetics
         // scale 3 easy
         // med 4
         // hard 5
-        static int scale = 3; // higher values cause the minesweeper grid to be bigger.
+        static int scale = 3; // higher values cause the minesweeper grid to be bigger. (more tiles in the same space)
         static int gridHeight = 2*scale;
         static int gridWidth = 3*scale;
         static int tileSize = 240/scale;
@@ -555,6 +555,10 @@ namespace Energetics
             mainForm.Visible = true;
             mainForm.Focus();
             this.Visible = false;
+            panelOn = true;
+            gameStarted = false;
+            scale = 3;
+            generateMap();
         }
 
         private void btnEasy_Click(object sender, EventArgs e)
