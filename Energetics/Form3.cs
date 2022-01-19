@@ -46,7 +46,7 @@ namespace Energetics
             score = 0;
             ballX = 5;
             ballyY = 5;
-            playerSpeed = 12;
+            playerSpeed = 15;
 
             ball.Left = 413;
             ball.Top = 374;
@@ -61,7 +61,7 @@ namespace Energetics
             {
                 if (x is PictureBox && (string)x.Tag == "blocks") //runs if x is a picturebox with a blocks tag
                 {
-                    x.BackColor = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+                    x.BackColor = Color.FromArgb(rand.Next(0), rand.Next(100,256), rand.Next(100,256));
                 }
             }
         }
@@ -81,7 +81,7 @@ namespace Energetics
 
             btnReturn.Visible = true;
             lblWinOrLose.Visible = true;
-
+            btnReset.Visible = true;
         }
 
         private void PlaceBlocks()
@@ -142,7 +142,6 @@ namespace Energetics
             {
                 lbl_Score.Text = "You have made " + score + " collisions!";
             }
-
             //keyisup();
             //keyisup();
 
@@ -196,6 +195,7 @@ namespace Energetics
 
             if (score == 32)
             {
+                lbl_Score.Text = "You have made 32 collision!";
                 gameOver("You Win!!");
             }
             if (ball.Top > 500)
@@ -235,10 +235,10 @@ namespace Energetics
         {
             if (this.Visible)
             {
-                //timer.Start();
+                
                 if (firstTimeOnPage == true)
                 {
-                    //MessageBox.Show("Hi", "Welcome to the solar game", MessageBoxButtons.OK);
+                    MessageBox.Show("Hi", "Welcome to the solar game", MessageBoxButtons.OK);
                     firstTimeOnPage = false;
                     
                 }
@@ -256,18 +256,37 @@ namespace Energetics
 
             btnReturn.Visible = false;
             btnStart.Visible = true;
+            btnReset.Visible = false;
             
             this.Hide();
             mainForm.Visible = true;
 
             lblWinOrLose.Visible = false;
-            lbl_Score.Text = ""; ;
+            lbl_Score.Text = "";
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             timer.Start();
             btnStart.Visible = false;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            removeBlocks();
+            PlaceBlocks();
+
+            btnReturn.Visible = false;
+            btnStart.Visible = true;
+
+            lblWinOrLose.Visible = false;
+            lbl_Score.Text = "";
+            btnReset.Visible = false;
+        }
+
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mainForm.Close();
         }
     }
 }

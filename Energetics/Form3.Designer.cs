@@ -36,6 +36,7 @@
             this.lbl_Score = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.lblWinOrLose = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +68,7 @@
             // 
             this.btnReturn.BackColor = System.Drawing.Color.Gold;
             this.btnReturn.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReturn.Location = new System.Drawing.Point(321, 270);
+            this.btnReturn.Location = new System.Drawing.Point(212, 271);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(203, 71);
             this.btnReturn.TabIndex = 5;
@@ -88,7 +89,7 @@
             // 
             this.btnStart.BackColor = System.Drawing.Color.Gold;
             this.btnStart.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(321, 270);
+            this.btnStart.Location = new System.Drawing.Point(321, 271);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(203, 71);
             this.btnStart.TabIndex = 6;
@@ -107,12 +108,26 @@
             this.lblWinOrLose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblWinOrLose.Visible = false;
             // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.Gold;
+            this.btnReset.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Location = new System.Drawing.Point(433, 271);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(200, 71);
+            this.btnReset.TabIndex = 8;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Visible = false;
+            this.btnReset.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Turquoise;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
             this.ClientSize = new System.Drawing.Size(842, 468);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblWinOrLose);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnReturn);
@@ -122,6 +137,7 @@
             this.KeyPreview = true;
             this.Name = "Form3";
             this.Text = "Heat Energy";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.VisibleChanged += new System.EventHandler(this.Form3_VisibleChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyisdown);
@@ -140,5 +156,6 @@
         private System.Windows.Forms.Label lbl_Score;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblWinOrLose;
+        private System.Windows.Forms.Button btnReset;
     }
 }
