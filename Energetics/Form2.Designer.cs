@@ -137,13 +137,13 @@
             this.lblOutcome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(130)))), ((int)(((byte)(115)))));
             this.lblOutcome.Font = new System.Drawing.Font("Calibri", 36F);
             this.lblOutcome.ForeColor = System.Drawing.Color.White;
-            this.lblOutcome.Location = new System.Drawing.Point(35, 144);
+            this.lblOutcome.Location = new System.Drawing.Point(35, 141);
             this.lblOutcome.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.lblOutcome.Name = "lblOutcome";
             this.lblOutcome.Padding = new System.Windows.Forms.Padding(20);
-            this.lblOutcome.Size = new System.Drawing.Size(713, 90);
+            this.lblOutcome.Size = new System.Drawing.Size(713, 372);
             this.lblOutcome.TabIndex = 11;
-            this.lblOutcome.Text = "You won! Or Lost.\r\n";
+            this.lblOutcome.Text = "You won! Or Lost.\r\n\r\n\r\ntext\r\n";
             this.lblOutcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form2
