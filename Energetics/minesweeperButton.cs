@@ -24,7 +24,7 @@ namespace Energetics
         int baseGreen;
         int baseBlue;
 
-        private const int colorRange = 30;
+        public int colorRange = 30;
         private double colorFrame = 0;
         private double colorFrameRate = .03;
 
@@ -32,6 +32,8 @@ namespace Energetics
         private int brightness = 0;
         private const int hoverBrightnessTarget = 40;
         private int brightnessChange = 0;
+
+        public bool reactive = true;
 
         public bool[] jitters = new bool[] { true, true, true };
 
@@ -54,7 +56,7 @@ namespace Energetics
         {
             // totally not directly copied from Minesweeper tile.
             // What? who said I had to write good code?
-            colorFrame += colorFrameRate + (Form2.panelOn?.1:0);
+            colorFrame += colorFrameRate + (reactive?(Form2.panelOn?.1:0):0);
            
             lblTile.BackColor = determineColor(colorFrame);
             
