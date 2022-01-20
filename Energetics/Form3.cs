@@ -54,6 +54,7 @@ namespace Energetics
             player.Left = 361;
             player.Top = 400;
 
+
             //timer.Start();
 
 
@@ -238,7 +239,10 @@ namespace Energetics
                 
                 if (firstTimeOnPage == true)
                 {
-                    MessageBox.Show("Hi", "Welcome to the solar game", MessageBoxButtons.OK);
+                    timer2.Start();
+
+
+                    MessageBox.Show("In this game, you have a particle and you want to make as many collisions as possible. Use the left and right arrow keys to move a paddle and stop the particle from bouncing away. Hit blocks to increase your total numbr of collisions and produce energy", "Welcome to the kinetic game", MessageBoxButtons.OK);
                     firstTimeOnPage = false;
                     
                 }
@@ -287,6 +291,11 @@ namespace Energetics
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainForm.Close();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

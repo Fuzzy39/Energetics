@@ -37,6 +37,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.lblWinOrLose = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             this.SuspendLayout();
@@ -121,6 +122,10 @@
             this.btnReset.Visible = false;
             this.btnReset.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,7 +141,7 @@
             this.Controls.Add(this.lbl_Score);
             this.KeyPreview = true;
             this.Name = "Form3";
-            this.Text = "Heat Energy";
+            this.Text = "Kinetic Energy";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.VisibleChanged += new System.EventHandler(this.Form3_VisibleChanged);
@@ -157,5 +162,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label lblWinOrLose;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Timer timer2;
     }
 }
