@@ -54,10 +54,6 @@ namespace Energetics
             player.Left = 361;
             player.Top = 400;
 
-
-            //timer.Start();
-
-
             foreach (Control x in this.Controls) //runs code for each control
             {
                 if (x is PictureBox && (string)x.Tag == "blocks") //runs if x is a picturebox with a blocks tag
@@ -69,7 +65,7 @@ namespace Energetics
 
         private void gameOver(string message)
         {
-            isgameOver = true;
+            isgameOver = true; //does stuff when game ends
             timer.Stop();
             if (score == 1)
             {
@@ -87,7 +83,7 @@ namespace Energetics
 
         private void PlaceBlocks()
         {
-            blockArray = new PictureBox[32];
+            blockArray = new PictureBox[32]; //places the blocks
             int a = 0;
             int top = 50;
             int left = 8;
@@ -100,7 +96,7 @@ namespace Energetics
                 blockArray[i].Tag = "blocks";
                 blockArray[i].BackColor = Color.Yellow;
 
-                if (a == 8)
+                if (a == 8) //places blocks
                 {
                     top = top + 35;
                     left = 8;
@@ -137,18 +133,17 @@ namespace Energetics
         {
             if (score ==1)
             {
-                lbl_Score.Text = "You have made " + score + " collision!";
+                lbl_Score.Text = "You have made " + score + " collision!"; //updates the score
             }
             else if (score != 1)
             {
                 lbl_Score.Text = "You have made " + score + " collisions!";
             }
-            //keyisup();
-            //keyisup();
+            
 
             if (moveLeft == true && player.Left > 0)
             {
-                player.Left -= playerSpeed;
+                player.Left -= playerSpeed; //moves the player
             }
 
             if (moveRigt == true && player.Left < 722)
@@ -156,7 +151,7 @@ namespace Energetics
                 player.Left += playerSpeed;
             }
 
-            ball.Left += ballX;
+            ball.Left += ballX; //moves the ball
             ball.Top += ballyY;
 
             if (ball.Left < 0 || ball.Left > 822)
@@ -167,7 +162,7 @@ namespace Energetics
             {
                 ballyY = -ballyY;
             }
-            if (ball.Bounds.IntersectsWith(player.Bounds))
+            if (ball.Bounds.IntersectsWith(player.Bounds)) //reverses direction when the ball is hit
             {
                 ballyY = rand.Next(5, 12) * -1;
 
@@ -180,8 +175,8 @@ namespace Energetics
                     ballX = rand.Next(5, 12);
                 }
             }
-
-            foreach (Control x in this.Controls)
+            
+            foreach (Control x in this.Controls) //code for when a block is hit
             {
                 if (x is PictureBox && (string)x.Tag == "blocks")
                 {
@@ -194,12 +189,12 @@ namespace Energetics
                 }
             }
 
-            if (score == 32)
+            if (score == 32) //ends the game 
             {
                 lbl_Score.Text = "You have made 32 collision!";
                 gameOver("You Win!!");
             }
-            if (ball.Top > 500)
+            if (ball.Top > 500) //if ball goes off screen
             {
                 gameOver("You lost :(");
             }
@@ -208,7 +203,7 @@ namespace Energetics
 
         private void keyisdown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left) //sets stuff to true when buttons are pressed
             {
                 moveLeft = true;
             }
@@ -226,7 +221,7 @@ namespace Energetics
             {
                 moveLeft = false;
             }
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right) //sets the stuff to false when the button isn't being pressed
             {
                 moveRigt = false;
             }
@@ -239,10 +234,10 @@ namespace Energetics
                 
                 if (firstTimeOnPage == true)
                 {
-                    timer2.Start();
+                    
 
-
-                    MessageBox.Show("In this game, you have a particle and you want to make as many collisions as possible. Use the left and right arrow keys to move a paddle and stop the particle from bouncing away. Hit blocks to increase your total numbr of collisions and produce energy", "Welcome to the kinetic game", MessageBoxButtons.OK);
+                    //shows message the first time the user opens the page
+                    MessageBox.Show("In this game, you have a particle and you want to make as many collisions as possible. Use the left and right arrow keys to move a paddle and stop the particle from bouncing away. Hit blocks to increase your total numbr of collisions.", "Welcome to the kinetic game", MessageBoxButtons.OK);
                     firstTimeOnPage = false;
                     
                 }
@@ -255,7 +250,7 @@ namespace Energetics
 
         private void button1_Click(object sender, EventArgs e)
         {
-            removeBlocks();
+            removeBlocks(); //resets form
             PlaceBlocks();
 
             btnReturn.Visible = false;
@@ -272,15 +267,15 @@ namespace Energetics
         private void btnStart_Click(object sender, EventArgs e)
         {
             timer.Start();
-            btnStart.Visible = false;
+            btnStart.Visible = false; //starts the game
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            removeBlocks();
+            removeBlocks(); //resets the form
             PlaceBlocks();
 
-            btnReturn.Visible = false;
+            btnReturn.Visible = false; 
             btnStart.Visible = true;
 
             lblWinOrLose.Visible = false;
@@ -290,7 +285,7 @@ namespace Energetics
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mainForm.Close();
+            mainForm.Close(); //when form is closed
         }
 
         private void timer2_Tick(object sender, EventArgs e)
