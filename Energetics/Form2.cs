@@ -209,7 +209,7 @@ namespace Energetics
             revealed++;
             if(revealed+bombs==tiles)
             {
-                lblOutcome.Text = "Success!";
+                lblOutcome.Text = "Success!\n\nYou just saved us a ton of paperwork.";
                 // victory achived!
                 //lblOutcome.Text = "Success!";
                 panelOn = true;
@@ -431,7 +431,7 @@ namespace Energetics
         {
             // this code is called when the player causes a meltdown.
             // this code is called when the player causes a meltdown
-            lblOutcome.Text = "Meltdown!";
+            lblOutcome.Text = "Meltdown!\n\nWell, I mean, you survived, so count yourself lucky.";
             for (int x = 0; x < gridWidth; x++)
             {
                 for (int y = 0; y < gridHeight; y++)
