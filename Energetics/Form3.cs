@@ -10,7 +10,8 @@ using System.Windows.Forms;
 
 namespace Energetics
 {
-    // January 13th, Matthew Lewis
+    // January 13th 2022, Matthew Lewis
+    // yeahhhhh this code is a mess. I'm unexperienced and this is my first time coding any movement
     public partial class Form3 : Form
     {
         //form stuff
@@ -238,7 +239,7 @@ namespace Energetics
                     
 
                     //shows message the first time the user opens the page
-                    MessageBox.Show("In this game, you have a particle and you want to make as many collisions as possible. Use the left and right arrow keys to move a paddle and stop the particle from bouncing away. Hit blocks to increase your total numbr of collisions.", "Welcome to the kinetic game", MessageBoxButtons.OK);
+                    MessageBox.Show("In this game, you have a particle and you want to make as many collisions as possible. Use the left and right arrow keys to move a paddle and stop the particle from bouncing away. Hit blocks to increase your total numbr of collisions, make sure not to lose the particle", "Welcome to the kinetic game", MessageBoxButtons.OK);
                     firstTimeOnPage = false;
                     
                 }
