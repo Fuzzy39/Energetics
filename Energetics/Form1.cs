@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace Energetics
 {
+    // January 20th, Mason Hill
+    // this code governs the primary form which selects between games.
     public partial class Form1 : Form
     {
         public Form2 formNuclear;
