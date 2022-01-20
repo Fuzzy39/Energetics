@@ -148,7 +148,8 @@ namespace Energetics
                              tileSize,
                              new Point(x, y), // position on grid
                              new Point((tileSize * x) + startX, +(tileSize * y) + startY), // position in pixels
-                             0 /*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
+                             0,/*((x + y) % 10) - 1*/ // number of neighbors that are bombs, which we will worry about later
+                             this
                          );
 
                         // add it to the array and to the controls
@@ -202,11 +203,13 @@ namespace Energetics
                 }
             }
         }
-        public static void checkForWin()
+        public void checkForWin()
         {
+            
             revealed++;
             if(revealed+bombs==tiles)
             {
+                lblOutcome.Text = "Success!";
                 // victory achived!
                 //lblOutcome.Text = "Success!";
                 panelOn = true;
@@ -424,11 +427,11 @@ namespace Energetics
         }
 
 
-        public static void revealAll()
+        public void revealAll()
         {
             // this code is called when the player causes a meltdown.
             // this code is called when the player causes a meltdown
-            
+            lblOutcome.Text = "Meltdown!";
             for (int x = 0; x < gridWidth; x++)
             {
                 for (int y = 0; y < gridHeight; y++)

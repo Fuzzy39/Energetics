@@ -32,7 +32,9 @@ namespace Energetics
         private bool revealed;
         private bool flagged;
 
-        public MinesweeperTile(int size, Point gridLocation, Point location, int neighbors)
+        private Form2 parent;
+
+        public MinesweeperTile(int size, Point gridLocation, Point location, int neighbors, Form2 parent)
         {
 
             //                      u    X    0    1    2    3    4    5    6    7    8
@@ -48,7 +50,7 @@ namespace Energetics
             revealed = false;
             flagged = false;
 
-
+            this.parent = parent;
             InitializeComponent();
             colorFrame = rand.NextDouble() * 6.28;
             lblTile.BackColor = determineColor(colorFrame);
@@ -284,12 +286,12 @@ namespace Energetics
             {
                 lblTile.Text = "💣";
                 if (!isBomb)
-                    Form2.revealAll();
+                    parent.revealAll();
                 return;
             }
             if (!isBomb)
             {
-                Form2.checkForWin();
+                parent.checkForWin();
             }
             if (neighbors == 0)
             {
